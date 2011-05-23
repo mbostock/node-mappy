@@ -1,0 +1,10 @@
+{
+  "name": "mappy",
+  "description":  "Map rendering backed by Cairo",
+  "version":  "0.0.1",
+  "author": "Mike Bostock <mbostock@gmail.com>",
+  "keywords": ["maps", "mapping", "canvas", "cairo"],
+  "repository": "git://github.com/mbostock/node-mappy",
+  "engines": { "node": "0.4.x" },
+  "main": "./lib/mappy.js"
+}
