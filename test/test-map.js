@@ -7,7 +7,8 @@ var w = 1280,
     h = 720;
 
 var view = mappy.view()
-    .size([w, h]);
+    .size([w, h])
+    .center([655, 1583, 12]);
 
 var image = mappy.image()
     .view(view)
@@ -22,7 +23,7 @@ var canvas = new Canvas(w, h),
 image.render(context, done);
 
 function done() {
-  var out = fs.createWriteStream(__dirname + "/test.png")
+  var out = fs.createWriteStream("/tmp/test.png")
   canvas.createPNGStream().on("data", function(chunk) {
     out.write(chunk);
   });
