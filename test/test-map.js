@@ -1,7 +1,7 @@
 var fs = require("fs"),
     util = require("util"),
+    Canvas = require("canvas"),
     mappy = require("../"),
-    Canvas = require("../../node-canvas/lib/canvas"),
     Image = Canvas.Image;
 
 var w = 1280,
