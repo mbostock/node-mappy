@@ -40,7 +40,7 @@ function loop() {
   if (i > frames) return;
   context.globalAlpha = 1;
   image1.render(context, function() {
-    context.globalAlpha = view.center()[2] % 1;
+    context.globalAlpha = 1 - Math.max(0, Math.min(1, 5 * (view.center()[2] % 1) - 2));
     image2.render(context, function() {
       util.log(__dirname + "/fade-" + i + ".png");
       fs.writeFile(__dirname + "/fade-" + i + ".png", canvas.toBuffer(), function() {
