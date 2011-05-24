@@ -43,8 +43,8 @@ function loop() {
   image1.render(context, function() {
     context.globalAlpha = view.center()[2] % 1;
     image2.render(context, function() {
-      util.log(__dirname + "/" + i + ".png");
-      fs.writeFile(__dirname + "/" + i + ".png", canvas.toBuffer(), function() {
+      util.log(__dirname + "/fade-" + i + ".png");
+      fs.writeFile(__dirname + "/fade-" + i + ".png", canvas.toBuffer(), function() {
         view.zoomBy(-.005);
         loop();
       });
