@@ -1,7 +1,7 @@
 var fs = require("fs"),
     util = require("util"),
-    Canvas = require("canvas"),
     mappy = require("../"),
+    Canvas = require("canvas"),
     Image = Canvas.Image;
 
 var w = 1280,
@@ -11,15 +11,23 @@ var view = mappy.view()
     .size([w, h])
     .center([655, 1583, 12]);
 
-var image = mappy.image()
-    .view(view)
-    .url(mappy.url("http://{S}tile.cloudmade.com"
+var url = mappy.url("http://{S}tile.cloudmade.com"
     + "/1a1b06b230af4efdbb989ea99e9841af" // http://cloudmade.com/register
     + "/998/256/{Z}/{X}/{Y}.png")
-    .hosts(["a.", "b.", "c.", ""]));
+    .hosts(["a.", "b.", "c.", ""]);
+
+var image1 = mappy.image()
+    .view(view)
+    .zoom(Math.ceil)
+    .url(url);
+
+var image2 = mappy.image()
+    .view(view)
+    .zoom(Math.floor)
+    .url(url);
 
 var frame = 0,
-    frames = 1200;
+    frames = 600;
 
 var canvas = new Canvas(w, h),
     context = canvas.getContext("2d");
@@ -31,11 +39,15 @@ loop();
 function loop() {
   var i = ++frame;
   if (i > frames) return;
-  image.render(context, function() {
-    util.log(__dirname + "/" + i + ".png");
-    fs.writeFile(__dirname + "/" + i + ".png", canvas.toBuffer(), function() {
-      view.zoomBy(-.002).rotateBy(-.001);
-      loop();
+  context.globalAlpha = 1;
+  image1.render(context, function() {
+    context.globalAlpha = view.center()[2] % 1;
+    image2.render(context, function() {
+      util.log(__dirname + "/" + i + ".png");
+      fs.writeFile(__dirname + "/" + i + ".png", canvas.toBuffer(), function() {
+        view.zoomBy(-.005);
+        loop();
+      });
     });
   });
 }
