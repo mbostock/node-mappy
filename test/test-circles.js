@@ -5,8 +5,7 @@ require("../lib/d3/d3.geo");
 var fs = require("fs"),
     util = require("util"),
     mappy = require("../"),
-    Canvas = require("canvas"),
-    Image = Canvas.Image;
+    Canvas = require("canvas");
 
 var w = 1280,
     h = 720,
